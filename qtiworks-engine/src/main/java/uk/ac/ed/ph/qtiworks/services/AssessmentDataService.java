@@ -310,6 +310,7 @@ public class AssessmentDataService {
     }
 
     public DeliverySettings createDefaultDeliverySettings(final User assessmentRunner, final AssessmentObjectType assessmentType) {
+        // And here we are...
         switch (assessmentType) {
             case ASSESSMENT_ITEM: {
                 final ItemDeliverySettingsTemplate template = createItemDeliverySettingsTemplate();
@@ -383,6 +384,7 @@ public class AssessmentDataService {
     }
 
     public DeliverySettings getEffectiveDeliverySettings(final User candidate, final Delivery delivery) {
+        // Finally, goto the next one though...
         Assert.notNull(candidate, "candidate");
         Assert.notNull(delivery, "delivery");
         DeliverySettings result = delivery.getDeliverySettings();

@@ -192,6 +192,7 @@ public class AssessmentRenderer {
      */
     public void renderItem(final ItemRenderingRequest request,
             final List<CandidateEventNotification> notifications, final Result result) {
+        // Just shoot me....
         Assert.notNull(request, "request");
         Assert.notNull(result, "result");
 
@@ -209,6 +210,7 @@ public class AssessmentRenderer {
 
         /* Pass ItemSessionState (as DOM Document) */
         final ItemSessionState itemSessionState = request.getItemSessionState();
+        // Here's the logic I want to see...
         xsltParameters.put("itemSessionState", ItemSessionStateXmlMarshaller.marshal(itemSessionState).getDocumentElement());
 
         /* Set control parameters */
@@ -229,6 +231,7 @@ public class AssessmentRenderer {
         xsltParameters.put("solutionUrl", renderingOptions.getSolutionUrl());
 
         /* Perform transform */
+        // Do some XSLT magic...
         doTransform(request, itemStandaloneXsltUri, xsltParameters, result);
     }
 
@@ -610,6 +613,7 @@ public class AssessmentRenderer {
      */
     private void doTransform(final AbstractRenderingRequest<?> renderingRequest, final URI inputUri,
             final URI rendererStylesheetUri, final Map<String, Object> xsltParameters, final Result result) {
+        // FINALLY, THIS FOO DOG DOES A RENDERING PREPARATION!!!
         Assert.notNull(renderingRequest);
         Assert.notNull(rendererStylesheetUri);
         Assert.notNull(result);

@@ -134,6 +134,7 @@ public class CandidateRenderingService extends CandidateServiceBase {
     public void renderCurrentCandidateItemSessionState(final CandidateSessionContext candidateSessionContext,
             final ItemRenderingOptions renderingOptions, final OutputStreamer outputStreamer)
             throws CandidateException, IOException {
+        // 1st Stop: Figure out what this does.
         Assert.notNull(candidateSessionContext, "candidateSessionContext");
         Assert.notNull(renderingOptions, "renderingOptions");
         Assert.notNull(outputStreamer, "outputStreamer");
@@ -171,6 +172,7 @@ public class CandidateRenderingService extends CandidateServiceBase {
     private void renderCurrentCandidateItemSessionState(final CandidateSessionContext candidateSessionContext,
             final ItemRenderingOptions renderingOptions, final StreamResult result)
             throws CandidateException {
+        // Step 2: I bristle at some of these private methods.
         final CandidateSession candidateSession = candidateSessionContext.getCandidateSession();
         if (candidateSession.isExploded()) {
             renderExploded(candidateSessionContext, renderingOptions, result);
@@ -200,10 +202,12 @@ public class CandidateRenderingService extends CandidateServiceBase {
     private void renderItemEvent(final CandidateSessionContext candidateSessionContext,
             final CandidateEvent candidateEvent, final ItemSessionState itemSessionState,
             final ItemRenderingOptions renderingOptions, final StreamResult result) {
+        // *sigh* Step 3: Seriously?
         final CandidateItemEventType itemEventType = candidateEvent.getItemEventType();
         final CandidateSession candidateSession = candidateEvent.getCandidateSession();
         final User candidate = candidateSession.getCandidate();
         final Delivery delivery = candidateSession.getDelivery();
+        // Man it doesn't stop...
         final ItemDeliverySettings itemDeliverySettings = (ItemDeliverySettings) assessmentDataService.getEffectiveDeliverySettings(candidate, delivery);
 
         /* Create and partially configure rendering request */
@@ -251,6 +255,7 @@ public class CandidateRenderingService extends CandidateServiceBase {
         candidateAuditLogger.logItemRendering(candidateEvent);
         final List<CandidateEventNotification> notifications = candidateEvent.getNotifications();
         try {
+            // Seems expensive to do at first glance.
             assessmentRenderer.renderItem(renderingRequest, notifications, result);
         }
         catch (final RuntimeException e) {
@@ -688,6 +693,7 @@ public class CandidateRenderingService extends CandidateServiceBase {
     private void streamRenderingResultFile(final File resultFile, final OutputStreamer outputStreamer,
             final AbstractRenderingOptions renderingOptions)
             throws IOException {
+        // XML is coming finally, and rendering foo is done here?
         final String contentType = renderingOptions.getSerializationMethod().getContentType();
         final long contentLength = resultFile.length();
         FileInputStream resultInputStream = null;

@@ -200,6 +200,7 @@ public class AssessmentManagementService {
     @Transactional(propagation=Propagation.REQUIRES_NEW)
     public Assessment importAssessment(final MultipartFile multipartFile, final boolean validate)
             throws PrivilegeException, AssessmentPackageDataImportException {
+        // Upload Assessment
         Assert.notNull(multipartFile, "multipartFile");
         final User caller = assertCallerMayCreateAssessment();
 
@@ -930,6 +931,7 @@ public class AssessmentManagementService {
 
     private AssessmentPackage importPackageFiles(final MultipartFile multipartFile, final boolean validate)
             throws AssessmentPackageDataImportException {
+        // Here next
         final User owner = identityService.assertCurrentThreadUser();
         return assessmentPackageFileService.importAssessmentPackage(owner, multipartFile, validate);
     }

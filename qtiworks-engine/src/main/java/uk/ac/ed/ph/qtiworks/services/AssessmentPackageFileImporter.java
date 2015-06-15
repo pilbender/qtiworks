@@ -101,6 +101,7 @@ public class AssessmentPackageFileImporter {
     public AssessmentPackage importAssessmentPackageData(final File importSandboxDirectory,
             final MultipartFile multipartFile)
             throws AssessmentPackageDataImportException {
+        // Upload Assessment
         Assert.notNull(importSandboxDirectory, "importSandboxDirectory");
         Assert.notNull(multipartFile, "multipartFile");
         AssessmentPackage assessmentPackage = null;
@@ -129,11 +130,13 @@ public class AssessmentPackageFileImporter {
     }
 
     private AssessmentPackage importStandaloneXml(final File importSandboxDirectory, final MultipartFile multipartFile) {
+        // Then here, THE XML VERSION IS STORED, A DIFFERENT STORAGE FORMAT IS NOT ATTEMPTED.
         /* Save XML */
         final File resultFile = new File(importSandboxDirectory, STANDALONE_XML_IMPORT_FILE_NAME);
         InputStream inputStream = null;
         try {
             inputStream = ServiceUtilities.ensureInputSream(multipartFile);
+            logger.debug("Upload file location: {}", resultFile.getName());
             FileUtils.copyInputStreamToFile(inputStream, resultFile);
         }
         catch (final IOException e) {

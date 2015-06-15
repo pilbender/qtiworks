@@ -152,6 +152,7 @@ public class AssessmentPackageFileService {
     public AssessmentPackage importAssessmentPackage(final User owner,
             final MultipartFile multipartFile, final boolean validate)
             throws AssessmentPackageDataImportException {
+        // Upload Assessment
         Assert.notNull(owner, "owner");
         Assert.notNull(multipartFile, "multipartFile");
         final File packageSandbox = filespaceManager.createAssessmentPackageSandbox(owner);
@@ -177,6 +178,7 @@ public class AssessmentPackageFileService {
 
             /* Validate (if asked) and record summary result */
             if (validate) {
+                // Not Leaving the engine yet....
                 final AssessmentObjectValidationResult<?> validationResult = loadAndValidateAssessment(assessmentPackage);
                 assessmentPackage.setValidated(true);
                 assessmentPackage.setLaunchable(validationResult.getResolvedAssessmentObject().getRootNodeLookup().wasSuccessful());
@@ -353,6 +355,7 @@ public class AssessmentPackageFileService {
     @SuppressWarnings("unchecked")
     public <E extends AssessmentObjectValidationResult<?>>
     E loadAndValidateAssessment(final AssessmentPackage assessmentPackage) {
+        // We finally dip into the QTI Works library...
         Assert.notNull(assessmentPackage, "assessmentPackage");
         final ResourceLocator inputResourceLocator = createResolvingResourceLocator(assessmentPackage);
         final URI assessmentObjectSystemId = createAssessmentObjectUri(assessmentPackage);

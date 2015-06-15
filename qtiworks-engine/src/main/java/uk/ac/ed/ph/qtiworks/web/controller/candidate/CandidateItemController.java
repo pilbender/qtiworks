@@ -105,6 +105,7 @@ public class CandidateItemController extends CandidateControllerBase {
     public void renderCurrentItemSessionState(@PathVariable final long xid, @PathVariable final String xsrfToken,
             final HttpServletResponse response)
             throws IOException, CandidateException {
+        // Okay, now we'll render.
         final CandidateSessionContext candidateSessionContext = getCandidateSessionContext();
 
         /* Create appropriate options that link back to this controller */

@@ -84,6 +84,7 @@ public final class AssessmentObjectXmlLoader {
     }
 
     public ItemValidationResult loadResolveAndValidateItem(final URI systemId) {
+        // QTI library stuff?????
         final QtiObjectReader qtiObjectReader = qtiXmlReader.createQtiObjectReader(inputResourceLocator, true);
         final ResolvedAssessmentItem resolvedAssessmentItem = new AssessmentObjectResolver(qtiObjectReader).resolveAssessmentItem(systemId);
         final AssessmentObjectValidator assessmentObjectValidator = new AssessmentObjectValidator(qtiObjectReader.getJqtiExtensionManager());

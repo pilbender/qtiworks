@@ -102,6 +102,7 @@ public class AnonymousStandaloneRunner {
     public String handleUploadAndRunForm(final HttpSession httpSession, final Model model,
             @Valid @ModelAttribute final StandaloneRunCommand command,
             final BindingResult errors) {
+        // Upload an assessment
         /* Catch any binding errors */
         if (errors.hasErrors()) {
             return "standalonerunner/uploadForm";
